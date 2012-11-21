@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "minion_server"
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.2pre"
   gem.authors       = ["Roger Leite"]
   gem.email         = ["roger.barreto@gmail.com"]
   gem.description   = %q{Tiny local server. Useful to mock servers in integration tests.}
