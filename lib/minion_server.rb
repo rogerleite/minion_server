@@ -8,10 +8,24 @@ class MinionServer
     @app = app
   end
 
-  def start(host = "localhost", port = 4000)
+  def start(host = "localhost", port = 4000, options = {})
     #puts "== Starting #{@app.inspect}"
     @pid_server = fork do
-      Rack::Server.start(:app => @app, :server => 'webrick', :environment => :none, :daemonize => false, :Host => host, :Port => port)
+      server_options = {
+        :app => @app,
+        :server => 'webrick',
+        :environment => :none,
+        :daemonize => false,
+        :Host => host,
+        :Port => port
+      }
+
+      if options[:mute]
+        server_options[:Logger] = Logger.new("/dev/null")
+        server_options[:AccessLog] = [nil, nil]
+      end
+
+      Rack::Server.start(server_options)
     end
     wait_for_service(host, port)
     self
