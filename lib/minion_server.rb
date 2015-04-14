@@ -2,7 +2,7 @@ require "socket"
 require "rack"
 
 class MinionServer
-  VERSION = "0.0.2pre"
+  VERSION = "0.0.2"
 
   def initialize(app)
     @app = app
